@@ -20,8 +20,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@ActiveProfiles("test") // Usa el perfil limpio sin data.sql
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD) // Limpia la base entre tests
+@ActiveProfiles("test") // Uses the clean profile without data.sql
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD) // Cleans the database between tests
 class SubscriptionControllerTest {
 
     @Autowired
@@ -102,8 +102,8 @@ class SubscriptionControllerTest {
 
         SubscriptionRequestDto subscriptionRequest = new SubscriptionRequestDto();
         subscriptionRequest.setName("Invalid Plan");
-        subscriptionRequest.setStartDate(LocalDate.now().plusDays(10)); // Fecha futura
-        subscriptionRequest.setEndDate(LocalDate.now()); // Fecha anterior
+        subscriptionRequest.setStartDate(LocalDate.now().plusDays(10)); // Future date
+        subscriptionRequest.setEndDate(LocalDate.now()); // Earlier date
         subscriptionRequest.setUserId(userId);
 
         mockMvc.perform(post("/api/subscriptions")
@@ -118,7 +118,7 @@ class SubscriptionControllerTest {
         subscriptionRequest.setName("Test Plan");
         subscriptionRequest.setStartDate(LocalDate.now());
         subscriptionRequest.setEndDate(LocalDate.now().plusDays(30));
-        subscriptionRequest.setUserId(999L); // ID inexistente
+        subscriptionRequest.setUserId(999L); // Nonexistent ID
 
         mockMvc.perform(post("/api/subscriptions")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -130,7 +130,7 @@ class SubscriptionControllerTest {
         UserRequestDto userRequest = new UserRequestDto();
         userRequest.setFirstName("Test");
         userRequest.setLastName("User");
-        userRequest.setEmail("test." + System.nanoTime() + "@udb.edu.sv"); // Email único
+        userRequest.setEmail("test." + System.nanoTime() + "@udb.edu.sv"); // Unique email
 
         MvcResult result = mockMvc.perform(post("/api/users")
                         .contentType(MediaType.APPLICATION_JSON)

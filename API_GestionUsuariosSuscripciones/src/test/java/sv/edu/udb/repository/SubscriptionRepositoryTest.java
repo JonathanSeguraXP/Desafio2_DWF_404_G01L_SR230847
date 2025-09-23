@@ -16,8 +16,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-@ActiveProfiles("test") // Usa el perfil limpio sin data.sql
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD) // Limpia la base entre tests
+@ActiveProfiles("test") // Uses the clean profile without data.sql
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD) // Cleans the database between tests
 class SubscriptionRepositoryTest {
 
     @Autowired
@@ -30,7 +30,7 @@ class SubscriptionRepositoryTest {
         User user = new User();
         user.setFirstName("Test");
         user.setLastName("User");
-        user.setEmail("test.user." + System.nanoTime() + "@udb.edu.sv"); // Email único por test
+        user.setEmail("test.user." + System.nanoTime() + "@udb.edu.sv"); // Unique email per test
         return userRepository.save(user);
     }
 

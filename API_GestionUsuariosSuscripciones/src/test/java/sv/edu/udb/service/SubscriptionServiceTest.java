@@ -23,12 +23,12 @@ class SubscriptionServiceDiagnosticTest {
     // TEST 1
     @Test
     void testServicesAreInjected() {
-        assertNotNull(subscriptionService, "SubscriptionService debería estar inyectado");
-        assertNotNull(userService, "UserService debería estar inyectado");
-        System.out.println("✅ Servicios inyectados correctamente");
+        assertNotNull(subscriptionService, "SubscriptionService should be injected");
+        assertNotNull(userService, "UserService should be injected");
+        System.out.println("✅ Services successfully injected");
     }
 
-    // TEST 2: Verifica que se puede crear un usuario
+    // TEST 2
     @Test
     void testCanCreateUser() {
         try {
@@ -38,22 +38,22 @@ class SubscriptionServiceDiagnosticTest {
             userRequest.setEmail("diagnostic." + System.currentTimeMillis() + "@udb.edu.sv");
 
             var user = userService.createUser(userRequest);
-            assertNotNull(user.getId(), "Usuario debería tener ID");
-            System.out.println("✅ Usuario creado correctamente. ID: " + user.getId());
+            assertNotNull(user.getId(), "User should have an ID");
+            System.out.println("✅ User successfully created. ID: " + user.getId());
         } catch (Exception e) {
-            fail("❌ Error creando usuario: " + e.getMessage());
+            fail("❌ Error creating user: " + e.getMessage());
         }
     }
 
-    // TEST 3: Verifica que se puede obtener la lista de usuarios
+    // TEST 3: Verifies that the user list can be retrieved
     @Test
     void testCanGetAllUsers() {
         try {
             var users = userService.getAllUsers();
-            assertNotNull(users, "Lista de usuarios no debería ser null");
-            System.out.println("✅ Lista de usuarios obtenida. Total: " + users.size());
+            assertNotNull(users, "User list should not be null");
+            System.out.println("✅ User list retrieved. Total: " + users.size());
         } catch (Exception e) {
-            fail("❌ Error obteniendo usuarios: " + e.getMessage());
+            fail("❌ Error retrieving users: " + e.getMessage());
         }
     }
 }

@@ -16,8 +16,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@ActiveProfiles("test") // Usa el perfil limpio sin data.sql
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD) // Limpia la base entre tests
+@ActiveProfiles("test") // Uses the clean profile without data.sql
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD) // Cleans the database between tests
 class UserControllerTest {
 
     @Autowired
@@ -31,7 +31,7 @@ class UserControllerTest {
         UserRequestDto userRequest = new UserRequestDto();
         userRequest.setFirstName("Test");
         userRequest.setLastName("User");
-        userRequest.setEmail("test.user." + System.nanoTime() + "@udb.edu.sv"); // Email único
+        userRequest.setEmail("test.user." + System.nanoTime() + "@udb.edu.sv"); // Unique email
 
         mockMvc.perform(post("/api/users")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -61,7 +61,7 @@ class UserControllerTest {
         UserRequestDto userRequest = new UserRequestDto();
         userRequest.setFirstName("Test");
         userRequest.setLastName("User");
-        userRequest.setEmail("invalid-email"); // Email inválido
+        userRequest.setEmail("invalid-email"); // Invalid email
 
         mockMvc.perform(post("/api/users")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -71,8 +71,7 @@ class UserControllerTest {
 
     @Test
     void createUser_WithDuplicateEmail_ShouldReturnBadRequest() throws Exception {
-        String email = "duplicate." + System.nanoTime() + "@udb.edu.sv"; // Email único por ejecución
-
+        String email = "duplicate." + System.nanoTime() + "@udb.edu.sv"; // Unique email per execution
 
         UserRequestDto userRequest1 = new UserRequestDto();
         userRequest1.setFirstName("First");
@@ -83,7 +82,6 @@ class UserControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(userRequest1)))
                 .andExpect(status().isCreated());
-
 
         UserRequestDto userRequest2 = new UserRequestDto();
         userRequest2.setFirstName("Second");

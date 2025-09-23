@@ -13,8 +13,8 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-@ActiveProfiles("test") // Asegura que se use el perfil limpio sin data.sql
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD) // Limpia la base entre tests
+@ActiveProfiles("test") // Ensures the clean profile is used without data.sql
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD) // Cleans the database between tests
 class UserRepositoryTest {
 
     @Autowired
