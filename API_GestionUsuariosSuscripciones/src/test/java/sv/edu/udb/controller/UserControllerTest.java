@@ -7,8 +7,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import sv.edu.udb.UserSubscripcionAPI.dto.UserRequestDto;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -16,7 +16,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@ActiveProfiles("test") // Usa el perfil limpio sin data.sql
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD) // Limpia la base entre tests
 class UserControllerTest {
 
     @Autowired
@@ -30,7 +31,7 @@ class UserControllerTest {
         UserRequestDto userRequest = new UserRequestDto();
         userRequest.setFirstName("Test");
         userRequest.setLastName("User");
-        userRequest.setEmail("test.user@udb.edu.sv");
+        userRequest.setEmail("test.user." + System.nanoTime() + "@udb.edu.sv"); // Email único
 
         mockMvc.perform(post("/api/users")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -38,7 +39,7 @@ class UserControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.firstName").value("Test"))
                 .andExpect(jsonPath("$.lastName").value("User"))
-                .andExpect(jsonPath("$.email").value("test.user@udb.edu.sv"))
+                .andExpect(jsonPath("$.email").value(userRequest.getEmail()))
                 .andExpect(jsonPath("$.id").exists());
     }
 
@@ -70,22 +71,24 @@ class UserControllerTest {
 
     @Test
     void createUser_WithDuplicateEmail_ShouldReturnBadRequest() throws Exception {
-        // Primer usuario
+        String email = "duplicate." + System.nanoTime() + "@udb.edu.sv"; // Email único por ejecución
+
+
         UserRequestDto userRequest1 = new UserRequestDto();
         userRequest1.setFirstName("First");
         userRequest1.setLastName("User");
-        userRequest1.setEmail("duplicate@udb.edu.sv");
+        userRequest1.setEmail(email);
 
         mockMvc.perform(post("/api/users")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(userRequest1)))
                 .andExpect(status().isCreated());
 
-        // Segundo usuario con mismo email
+
         UserRequestDto userRequest2 = new UserRequestDto();
         userRequest2.setFirstName("Second");
         userRequest2.setLastName("User");
-        userRequest2.setEmail("duplicate@udb.edu.sv");
+        userRequest2.setEmail(email);
 
         mockMvc.perform(post("/api/users")
                         .contentType(MediaType.APPLICATION_JSON)

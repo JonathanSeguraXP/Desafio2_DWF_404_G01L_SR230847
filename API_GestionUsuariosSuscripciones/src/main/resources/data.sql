@@ -1,21 +1,15 @@
+--EXAMPLE
+INSERT INTO users (id, first_name, last_name, email, created_at, updated_at)
 
-CREATE TABLE IF NOT EXISTS users (
-                                     id BIGINT PRIMARY KEY AUTO_INCREMENT,
-                                     first_name VARCHAR(100) NOT NULL,
-                                     last_name VARCHAR(100) NOT NULL,
-                                     email VARCHAR(255) UNIQUE NOT NULL,
-                                     created_at TIMESTAMP,
-                                     updated_at TIMESTAMP
-);
+VALUES
+    (1, 'Jonathan', 'Tester', 'jonathan@udb.edu.sv', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (2, 'Ana', 'Lopez', 'ana.lopez@udb.edu.sv', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
-CREATE TABLE IF NOT EXISTS subscriptions (
-                                             id BIGINT PRIMARY KEY AUTO_INCREMENT,
-                                             name VARCHAR(255) NOT NULL,
-                                             start_date DATE NOT NULL,
-                                             end_date DATE NOT NULL,
-                                             is_active BOOLEAN,
-                                             created_at TIMESTAMP,
-                                             updated_at TIMESTAMP,
-                                             user_id BIGINT NOT NULL,
-                                             FOREIGN KEY (user_id) REFERENCES users(id)
-);
+-- ===============================
+-- EXAMPLE
+-- ===============================
+INSERT INTO subscriptions (id, name, start_date, end_date, is_active, created_at, updated_at, user_id)
+VALUES
+    (1, 'Netflix', CURRENT_DATE, DATEADD('DAY', 30, CURRENT_DATE), TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1),
+    (2, 'Spotify', CURRENT_DATE, DATEADD('DAY', 60, CURRENT_DATE), TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 2),
+    (3, 'Disney+', CURRENT_DATE, DATEADD('DAY', 90, CURRENT_DATE), FALSE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1);

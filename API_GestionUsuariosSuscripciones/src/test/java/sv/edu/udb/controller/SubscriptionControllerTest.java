@@ -7,6 +7,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import sv.edu.udb.UserSubscripcionAPI.dto.SubscriptionRequestDto;
@@ -19,7 +20,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@ActiveProfiles("test") // Usa el perfil limpio sin data.sql
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD) // Limpia la base entre tests
 class SubscriptionControllerTest {
 
     @Autowired
@@ -30,7 +32,6 @@ class SubscriptionControllerTest {
 
     @Test
     void createSubscription_WithValidData_ShouldReturnCreated() throws Exception {
-
         Long userId = createTestUser();
 
         SubscriptionRequestDto subscriptionRequest = new SubscriptionRequestDto();
@@ -50,6 +51,9 @@ class SubscriptionControllerTest {
 
     @Test
     void getAllSubscriptions_ShouldReturnOk() throws Exception {
+        Long userId = createTestUser();
+        createTestSubscription(userId);
+
         mockMvc.perform(get("/api/subscriptions"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray());
@@ -57,7 +61,6 @@ class SubscriptionControllerTest {
 
     @Test
     void getSubscriptionsByUserId_ShouldReturnSubscriptions() throws Exception {
-        // Crear usuario y suscripción para esta prueba
         Long userId = createTestUser();
         createTestSubscription(userId);
 
@@ -69,7 +72,6 @@ class SubscriptionControllerTest {
 
     @Test
     void getSubscriptionsByUserId_WhenUserHasNoSubscriptions_ShouldReturnEmptyArray() throws Exception {
-
         Long userId = createTestUser();
 
         mockMvc.perform(get("/api/subscriptions/user/" + userId))
@@ -80,7 +82,6 @@ class SubscriptionControllerTest {
 
     @Test
     void activateSubscription_ShouldReturnOk() throws Exception {
-
         Long userId = createTestUser();
         Long subscriptionId = createTestSubscription(userId);
 
@@ -102,7 +103,7 @@ class SubscriptionControllerTest {
         SubscriptionRequestDto subscriptionRequest = new SubscriptionRequestDto();
         subscriptionRequest.setName("Invalid Plan");
         subscriptionRequest.setStartDate(LocalDate.now().plusDays(10)); // Fecha futura
-        subscriptionRequest.setEndDate(LocalDate.now()); // Fecha anterior a start
+        subscriptionRequest.setEndDate(LocalDate.now()); // Fecha anterior
         subscriptionRequest.setUserId(userId);
 
         mockMvc.perform(post("/api/subscriptions")
@@ -117,7 +118,7 @@ class SubscriptionControllerTest {
         subscriptionRequest.setName("Test Plan");
         subscriptionRequest.setStartDate(LocalDate.now());
         subscriptionRequest.setEndDate(LocalDate.now().plusDays(30));
-        subscriptionRequest.setUserId(999L); // User ID que no existe
+        subscriptionRequest.setUserId(999L); // ID inexistente
 
         mockMvc.perform(post("/api/subscriptions")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -125,12 +126,11 @@ class SubscriptionControllerTest {
                 .andExpect(status().isNotFound());
     }
 
-
     private Long createTestUser() throws Exception {
         UserRequestDto userRequest = new UserRequestDto();
         userRequest.setFirstName("Test");
         userRequest.setLastName("User");
-        userRequest.setEmail("test." + System.currentTimeMillis() + "@udb.edu.sv"); // Email único
+        userRequest.setEmail("test." + System.nanoTime() + "@udb.edu.sv"); // Email único
 
         MvcResult result = mockMvc.perform(post("/api/users")
                         .contentType(MediaType.APPLICATION_JSON)

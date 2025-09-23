@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
 import sv.edu.udb.UserSubscripcionAPI.entity.Subscription;
 import sv.edu.udb.UserSubscripcionAPI.entity.User;
 import sv.edu.udb.UserSubscripcionAPI.repository.SubscriptionRepository;
@@ -15,7 +16,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@ActiveProfiles("test") // Usa el perfil limpio sin data.sql
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD) // Limpia la base entre tests
 class SubscriptionRepositoryTest {
 
     @Autowired
@@ -28,7 +30,7 @@ class SubscriptionRepositoryTest {
         User user = new User();
         user.setFirstName("Test");
         user.setLastName("User");
-        user.setEmail("test.user@udb.edu.sv");
+        user.setEmail("test.user." + System.nanoTime() + "@udb.edu.sv"); // Email único por test
         return userRepository.save(user);
     }
 
