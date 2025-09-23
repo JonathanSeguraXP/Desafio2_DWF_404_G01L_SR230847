@@ -50,7 +50,69 @@ Access H2 Console (for testing)
 Visit: http://localhost:8080/h2-console Use JDBC URL: jdbc:h2:mem:testdb
 
 📁 Project Structure
-├── src/ │ ├── main/ │ │ ├── java/ │ │ │ └── sv/ │ │ │ └── edu/ │ │ │ └── udb/ │ │ │ ├── config/ │ │ │ │ └── SwaggerConfig.java │ │ │ ├── controller/ │ │ │ │ └── UserController.java │ │ │ ├── dto/ │ │ │ │ ├── SubscriptionRequestDto.java │ │ │ │ ├── SubscriptionResponseDto.java │ │ │ │ └── UserResponseDto.java │ │ │ ├── entity/ │ │ │ │ ├── Subscription.java │ │ │ │ └── User.java │ │ │ ├── exception/ │ │ │ │ ├── ErrorResponse.java │ │ │ │ ├── GlobalExceptionHandler.java │ │ │ │ ├── ResourceNotFoundException.java │ │ │ │ └── ValidationException.java │ │ │ ├── mapper/ │ │ │ │ ├── SubscriptionMapper.java │ │ │ │ └── UserMapper.java │ │ │ ├── repository/ │ │ │ │ ├── SubscriptionRepository.java │ │ │ │ └── UserRepository.java │ │ │ ├── service/ │ │ │ │ ├── impl/ │ │ │ │ │ └── SubscriptionServiceImpl.java │ │ │ │ ├── SubscriptionService.java │ │ │ │ └── UserService.java │ │ │ └── AplicacionUsuariosSuscripcionesApplication.java │ │ └── resources/ │ │ ├── application.properties │ │ ├── application-dev.properties │ │ ├── application-test.properties │ │ └── data.sql │ ├── test/ │ └── java/ │ └── sv/ │ └── edu/ │ └── udb/ │ ├── controller/ │ │ ├── UserControllerTest.java │ │ └── SubscriptionControllerTest.java │ ├── repository/ │ │ ├── UserRepositoryTest.java │ │ └── SubscriptionRepositoryTest.java │ └── service/ │ ├── SubscriptionServiceDiagnosticTest.java │ ├── SubscriptionServiceTest.java │ └── AplicacionUsuariosSuscripcionesApplicationTest.java │ ├── .gitignore ├── .gitattributes ├── mvnw ├── mvnw.cmd └── pom.xml
+
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── sv/
+│   │   │       └── edu/
+│   │   │           └── udb/
+│   │   │               ├── config/
+│   │   │               │   └── SwaggerConfig.java
+│   │   │               ├── controller/
+│   │   │               │   └── UserController.java
+│   │   │               ├── dto/
+│   │   │               │   ├── SubscriptionRequestDto.java
+│   │   │               │   ├── SubscriptionResponseDto.java
+│   │   │               │   └── UserResponseDto.java
+│   │   │               ├── entity/
+│   │   │               │   ├── Subscription.java
+│   │   │               │   └── User.java
+│   │   │               ├── exception/
+│   │   │               │   ├── ErrorResponse.java
+│   │   │               │   ├── GlobalExceptionHandler.java
+│   │   │               │   ├── ResourceNotFoundException.java
+│   │   │               │   └── ValidationException.java
+│   │   │               ├── mapper/
+│   │   │               │   ├── SubscriptionMapper.java
+│   │   │               │   └── UserMapper.java
+│   │   │               ├── repository/
+│   │   │               │   ├── SubscriptionRepository.java
+│   │   │               │   └── UserRepository.java
+│   │   │               ├── service/
+│   │   │               │   ├── impl/
+│   │   │               │   │   └── SubscriptionServiceImpl.java
+│   │   │               │   ├── SubscriptionService.java
+│   │   │               │   └── UserService.java
+│   │   │               └── AplicacionUsuariosSuscripcionesApplication.java
+│   │   └── resources/
+│   │       ├── application.properties
+│   │       ├── application-dev.properties
+│   │       ├── application-test.properties
+│   │       └── data.sql
+│
+├── test/
+│   └── java/
+│       └── sv/
+│           └── edu/
+│               └── udb/
+│                   ├── controller/
+│                   │   ├── UserControllerTest.java
+│                   │   └── SubscriptionControllerTest.java
+│                   ├── repository/
+│                   │   ├── UserRepositoryTest.java
+│                   │   └── SubscriptionRepositoryTest.java
+│                   └── service/
+│                       ├── SubscriptionServiceDiagnosticTest.java
+│                       ├── SubscriptionServiceTest.java
+│                       └── AplicacionUsuariosSuscripcionesApplicationTest.java
+│
+├── .gitignore
+├── .gitattributes
+├── mvnw
+├── mvnw.cmd
+└── pom.xml
+
 
 📌 Example Endpoints
 👤 User Endpoints
