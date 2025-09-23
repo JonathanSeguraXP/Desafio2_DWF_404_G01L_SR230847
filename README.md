@@ -52,7 +52,7 @@ Visit: http://localhost:8080/h2-console Use JDBC URL: jdbc:h2:mem:testdb
 
 ## 📁 Project Structure
 
-###
+```bash
 ├── src/
 │   ├── main/
 │   │   ├── java/
@@ -114,7 +114,7 @@ Visit: http://localhost:8080/h2-console Use JDBC URL: jdbc:h2:mem:testdb
 ├── mvnw
 ├── mvnw.cmd
 └── pom.xml
-
+```
 
 ## 📌 Example Endpoints
 ## 👤 User Endpoints
