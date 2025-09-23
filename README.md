@@ -45,11 +45,12 @@ mvn spring-boot:run
 
 # Run all tests
 mvn test
+```
 
-Access H2 Console (for testing)
+### Access H2 Console (for testing)
 Visit: http://localhost:8080/h2-console Use JDBC URL: jdbc:h2:mem:testdb
 
-📁 Project Structure
+##📁 Project Structure
 
 ├── src/
 │   ├── main/
@@ -114,8 +115,9 @@ Visit: http://localhost:8080/h2-console Use JDBC URL: jdbc:h2:mem:testdb
 └── pom.xml
 
 
-📌 Example Endpoints
-👤 User Endpoints
+## 📌 Example Endpoints
+## 👤 User Endpoints
+```bash
 http
 POST /api/users
 GET /api/users
@@ -130,7 +132,9 @@ Content-Type: application/json
   "lastName": "Doe",
   "email": "john.doe@example.com"
 }
-📄 Subscription Endpoints
+```
+## 📄 Subscription Endpoints
+```bash
 http
 POST /api/subscriptions
 GET /api/subscriptions
@@ -147,8 +151,9 @@ Content-Type: application/json
   "endDate": "2025-10-22",
   "userId": 1
 }
+```
 
-🧪 Testing
+## 🧪 Testing
 All tests use the test profile with an isolated H2 database. Context is reset between tests to ensure clean state.
 
 ✅ Service Layer
@@ -164,5 +169,5 @@ UserControllerTest
 
 SubscriptionControllerTest
 
-👨‍💻 Author
+## 👨‍💻 Author
 Jonathan
