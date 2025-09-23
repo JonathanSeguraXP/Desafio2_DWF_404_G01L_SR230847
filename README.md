@@ -1,15 +1,19 @@
 # Desafio2_DWF_404_G01L_SR230847
 # 📦 User Subscription API
 
-A Spring Boot RESTful API for managing users and their subscriptions. Built with JPA, H2, and tested using JUnit and MockMvc.
+A complete backend project built with Spring Boot that manages users and their subscriptions. This repository includes full source code, integration tests, and a clean testing profile for reproducible results.
 
-## 🚀 Features
+## 📝 Project Description
 
-- Create, retrieve, and validate users
+This RESTful API allows you to:
+
+- Create and retrieve users
 - Create and manage subscriptions
 - Activate subscriptions
-- Filter subscriptions by user or status
-- Full integration and repository testing
+- Filter subscriptions by user or active status
+- Validate input data with custom rules
+
+The project is designed for educational and demo purposes, with clear structure and automated tests to ensure reliability.
 
 ## 🛠️ Tech Stack
 
@@ -17,8 +21,29 @@ A Spring Boot RESTful API for managing users and their subscriptions. Built with
 - **Spring Boot**
 - **Spring Data JPA**
 - **H2 Database (in-memory)**
-- **JUnit 5 & MockMvc**
+- **JUnit 5**
+- **MockMvc**
 - **Maven**
+- **Swagger**
 
-## 📁 Project Structure
+## 📦 Installation & Execution
+
+### Prerequisites
+
+- Java 17+
+- Maven 3.5.3
+
+### Steps
+
+```bash
+# Clone the repository
+git clone https://github.com/JonathanSeguraXP/Desafio2_DWF_404_G01L_SR230847.git
+cd user-subscription-api
+
+# Run the application
+mvn spring-boot:run
+
+# Run all tests
+mvn test
+
 
