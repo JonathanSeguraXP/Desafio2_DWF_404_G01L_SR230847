@@ -50,8 +50,9 @@ mvn test
 ### Access H2 Console (for testing)
 Visit: http://localhost:8080/h2-console Use JDBC URL: jdbc:h2:mem:testdb
 
-##📁 Project Structure
+## 📁 Project Structure
 
+###
 ├── src/
 │   ├── main/
 │   │   ├── java/
